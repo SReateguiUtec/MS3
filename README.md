@@ -37,9 +37,11 @@ Edita `.env` con los datos de conexion a MongoDB.
 DB_HOST=localhost
 DB_PORT=27017
 DB_NAME=noticias_db
-DB_USER=
-DB_PASSWORD=
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
 APP_PORT=5003
+NEWS_API_KEY=your_newsapi_key
+FINHUB_API_KEY=your_finhub_api_key
 ```
 
 Si `DB_USER` y `DB_PASSWORD` estan vacios, el servicio se conecta sin autenticacion.
