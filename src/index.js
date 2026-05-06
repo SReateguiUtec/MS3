@@ -22,9 +22,18 @@ if (user && password) {
   mongoUri = `mongodb://${host}:${port}/${dbName}`;
 }
 
-mongoose.connect(mongoUri)
+mongoose.connect(mongoUri, {
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  connectTimeoutMS: 10000,
+  heartbeatFrequencyMS: 10000,
+  maxPoolSize: 5,
+})
   .then(() => console.log('Conectado a MongoDB'))
-  .catch(err => console.error('Error de conexión:', err));
+  .catch(err => {
+    console.error('Error de conexión:', err.message);
+    process.exit(1); // Fuerza restart limpio para que Docker reintente
+  });
 
 app.use('/api/noticias', noticiasRoutes);
 app.use('/api/fuentes', fuentesRoutes);
