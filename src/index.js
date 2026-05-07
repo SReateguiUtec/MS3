@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpecs = require('./swagger');
 const mongoose = require('mongoose');
 const noticiasRoutes = require('./routes/noticias');
 const fuentesRoutes = require('./routes/fuentes');
@@ -8,6 +10,9 @@ const fuentesRoutes = require('./routes/fuentes');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Documentación de Swagger
+app.use('/swagger-ui/m3', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 const host = process.env.DB_HOST || 'localhost';
 const port = process.env.DB_PORT || '27017';

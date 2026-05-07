@@ -3,6 +3,21 @@ const Noticia = require('../models/Noticia');
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /api/noticias/latest:
+ *   get:
+ *     summary: Últimas noticias
+ *     tags: [Noticias]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Lista de noticias recientes
+ */
 // Últimas noticias de todos los símbolos (sin filtro)
 router.get('/latest', async (req, res) => {
   try {
@@ -14,6 +29,22 @@ router.get('/latest', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/noticias/{simbolo}:
+ *   get:
+ *     summary: Noticias por símbolo
+ *     tags: [Noticias]
+ *     parameters:
+ *       - in: path
+ *         name: simbolo
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Lista de noticias del símbolo
+ */
 // Noticias por símbolo
 router.get('/:simbolo', async (req, res) => {
   try {
@@ -39,6 +70,22 @@ router.get('/:simbolo/latest', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/noticias/{simbolo}/sentimiento:
+ *   get:
+ *     summary: Sentimiento agregado de un símbolo
+ *     tags: [Noticias]
+ *     parameters:
+ *       - in: path
+ *         name: simbolo
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sentimiento predominante
+ */
 // Sentimiento agregado de un símbolo
 router.get('/:simbolo/sentimiento', async (req, res) => {
   try {
